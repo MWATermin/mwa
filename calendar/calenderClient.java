@@ -3,7 +3,12 @@ package calendar;
 import java.util.Calendar;
 import java.util.GregorianCalendar;
 import java.util.Hashtable;
+
 import javax.naming.*;
+
+import calendar.User;
+import calendar.UserRemoteInterface;
+
 
 public class calenderClient {
 	
@@ -14,9 +19,17 @@ public class calenderClient {
 	private static void invokeStatelessBean() throws NamingException {
 		final UserRemoteInterface CalenderInterface = doLoopup();
 		System.out.println("Obtained a Quoter for invocation"); 
-		Calendar cal = new GregorianCalendar(2013,1,28,13,24,56);
-		Date date = new Date(cal, 30, "bla", "cok", "suking", "gangban",null);
-		CalenderInterface.createDate(date);
+		
+		System.out.println("createQuote\n");
+		int myid = CalenderInterface.createDate("HelloDate");
+		System.out.println("CalendarID: " + myid + "\n");
+		
+		System.out.println("readQuote\n");
+		System.out.println(CalenderInterface.readText( myid));
+		
+		//Calendar cal = new GregorianCalendar(2013,1,28,13,24,56);
+		//Date date = new Date(cal, 30, "bla", "cok", "suking", "gangban",null);
+		//CalenderInterface.createDate(date);
 	}
 
 	// Looks up and returns the proxy to remote interface
