@@ -2,10 +2,13 @@ package calendar;
 
 import java.util.*;
 import javax.ejb.*;
+import javax.persistence.*;
 
 
 @Stateless
 public class User implements UserRemoteInterface {
+	@PersistenceContext(unitName = "calenderPersistenceUnit")
+	private EntityManager em;
 	
     public User() {
         // TODO Auto-generated constructor stub
@@ -13,8 +16,10 @@ public class User implements UserRemoteInterface {
 
 	@Override
 	public Integer createDate(Date date) {
-		// TODO Auto-generated method stub
-		return null;
+		Date d = new Date();  
+		d = date;
+		em.persist(d);
+		return d.getId();
 	}
 
 	@Override

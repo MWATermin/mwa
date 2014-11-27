@@ -2,6 +2,8 @@ package calendar;
 
 import java.util.*;
 
+import javax.persistence.*;
+
 /*
 ID (Int) //autoincrement
 Datum des Termins (Calendar)
@@ -13,12 +15,29 @@ Terminname (String)
 Beschreibung (String)
 Teilnehmende Personen (List member)
 */
+
+@Entity
 public class Date {
-	public Date(Integer id, Calendar dateAndTime, Integer duration,
+	@Id
+	@GeneratedValue
+	public Integer id;
+	
+	public Calendar dateAndTime;
+	public Integer duration;
+	public String author;
+	public String place;
+	public String label;
+	public String description;
+	public List<String> members;
+	
+	public Date(){
+		super();
+	}
+	
+	public Date(Calendar dateAndTime, Integer duration,
 			String author, String place, String label, String description,
 			List<String> members) {
 		super();
-		this.id = id;
 		this.dateAndTime = dateAndTime;
 		this.duration = duration;
 		this.author = author;
@@ -27,12 +46,12 @@ public class Date {
 		this.description = description;
 		this.members = members;
 	}
-	public Integer id;
-	public Calendar dateAndTime;
-	public Integer duration;
-	public String author;
-	public String place;
-	public String label;
-	public String description;
-	public List<String> members;	
+	
+	public int getId(){
+		return id;
+	}
+	
+	public void setId(int newId){
+		id = newId;
+	}
 }
