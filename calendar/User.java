@@ -1,12 +1,15 @@
 package calendar;
 
 import java.util.*;
+
 import javax.ejb.*;
 import javax.persistence.*;
 
 
+
 @Stateless
 public class User implements UserRemoteInterface {
+	
 	@PersistenceContext(unitName = "calenderPersistenceUnit")
 	private EntityManager em;
 	
@@ -14,6 +17,21 @@ public class User implements UserRemoteInterface {
         // TODO Auto-generated constructor stub
     }
 
+    @Override
+	public Integer createDate(String text) {
+		Date d = new Date();  
+		d.setText(text);
+		em.persist(d);
+		return d.getId();
+	}
+    
+    
+    public String readText(int id) {
+    	Date q = em.find(Date.class, id);
+		return q.getText();
+    	
+    }
+    
 	@Override
 	public Integer createDate(Date date) {
 		Date d = new Date();  

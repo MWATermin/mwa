@@ -18,9 +18,27 @@ Teilnehmende Personen (List member)
 
 @Entity
 public class Date {
+
+	// Test für Hello World
+	public String text;
+	
+	public String getText() {
+		return text;
+	}
+
+	public void setText(String msg) {
+		this.text = msg;
+	}
+	// Ende Test
+	
+	
+	private int id;
+	
 	@Id
-	@GeneratedValue
-	public Integer id;
+	@GeneratedValue // Sorgt dafür, das ID automatisch erzeugt wird
+	public int getId() {
+		return id;
+	}
 	
 	public Calendar dateAndTime;
 	public Integer duration;
@@ -47,9 +65,6 @@ public class Date {
 		this.members = members;
 	}
 	
-	public int getId(){
-		return id;
-	}
 	
 	public void setId(int newId){
 		id = newId;
