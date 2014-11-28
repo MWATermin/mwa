@@ -1,14 +1,7 @@
 package calendar;
 
-import java.util.Calendar;
-import java.util.GregorianCalendar;
-import java.util.Hashtable;
-
+import java.util.*;
 import javax.naming.*;
-
-import calendar.User;
-import calendar.UserRemoteInterface;
-
 
 public class calenderClient {
 	
@@ -21,15 +14,19 @@ public class calenderClient {
 		System.out.println("Obtained a Quoter for invocation"); 
 		
 		System.out.println("createQuote\n");
-		int myid = CalenderInterface.createDate("HelloDate");
+		/* int myid = CalenderInterface.createDate("HelloDate");
 		System.out.println("CalendarID: " + myid + "\n");
 		
 		System.out.println("readQuote\n");
 		System.out.println(CalenderInterface.readText( myid));
+		*/ 
 		
-		//Calendar cal = new GregorianCalendar(2013,1,28,13,24,56);
-		//Date date = new Date(cal, 30, "bla", "cok", "suking", "gangban",null);
-		//CalenderInterface.createDate(date);
+		Calendar cal = new GregorianCalendar(2013,1,28,13,24,56);
+		Date date = new Date(cal, 30, "bla", "cok", "suking", "gangbang", null);
+		//int myid = CalenderInterface.createDate();
+		Integer myid = CalenderInterface.createDate( date);
+		System.out.println("CalendarID: " + myid + "\n");
+		
 	}
 
 	// Looks up and returns the proxy to remote interface

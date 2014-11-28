@@ -1,7 +1,7 @@
 package calendar;
 
+import java.io.*;
 import java.util.*;
-
 import javax.persistence.*;
 
 /*
@@ -16,46 +16,29 @@ Beschreibung (String)
 Teilnehmende Personen (List member)
 */
 
+
 @Entity
-public class Date {
-
-	// Test für Hello World
-	public String text;
+public class Date implements Serializable {
 	
-	public String getText() {
-		return text;
-	}
-
-	public void setText(String msg) {
-		this.text = msg;
-	}
-	// Ende Test
+	// Variablendeklaration
+	private Integer id;
+	private Calendar dateAndTime;
+	private Integer duration;
+	private String author;
+	private String place;
+	private String label;
+	private String description;
+	private String members;
 	
-	
-	private int id;
-	
-	@Id
-	@GeneratedValue // Sorgt dafür, das ID automatisch erzeugt wird
-	public int getId() {
-		return id;
-	}
-	
-	public Calendar dateAndTime;
-	public Integer duration;
-	public String author;
-	public String place;
-	public String label;
-	public String description;
-	public List<String> members;
-	
-	public Date(){
+	// Default Konstruktor
+	public Date() {
 		super();
 	}
 	
-	public Date(Calendar dateAndTime, Integer duration,
-			String author, String place, String label, String description,
-			List<String> members) {
-		super();
+	// Konstruktor
+	public Date( Calendar dateAndTime, Integer duration, 
+			String author, String place, String label, String description, String members) {
+		//super();
 		this.dateAndTime = dateAndTime;
 		this.duration = duration;
 		this.author = author;
@@ -65,8 +48,70 @@ public class Date {
 		this.members = members;
 	}
 	
+	// Getters & Setters
+	@Id
+	@GeneratedValue // Sorgt dafür, das ID automatisch erzeugt wird
+	public Integer getId() {
+		return id;
+	}
 	
-	public void setId(int newId){
-		id = newId;
+	public void setId( Integer id) {
+		this.id = id;
+	}
+	
+	public Calendar getDateAndTime() {
+		return dateAndTime;
+	}
+
+	public void setDateAndTime( Calendar dateAndTime) {
+		this.dateAndTime = dateAndTime;
+	}
+
+	public Integer getDuration() {
+		return duration;
+	}
+
+	public void setDuration( Integer duration) {
+		this.duration = duration;
+	}
+
+	public String getAuthor() {
+		return author;
+	}
+
+	public void setAuthor( String author) {
+		this.author = author;
+	}
+
+	public String getPlace() {
+		return place;
+	}
+
+	public void setPlace( String place) {
+		this.place = place;
+	}
+
+	public String getLabel() {
+		return label;
+	}
+
+	public void setLabel( String label) {
+		this.label = label;
+	}
+
+	public String getDescription() {
+		return description;
+	}
+
+	public void setDescription( String description) {
+		this.description = description;
+	}
+	
+	public String getMembers() {
+		return members;
+	}
+
+	public void setMembers( String members) {
+		this.members = members;
 	}
 }

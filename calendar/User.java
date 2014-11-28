@@ -1,10 +1,8 @@
 package calendar;
 
 import java.util.*;
-
 import javax.ejb.*;
 import javax.persistence.*;
-
 
 
 @Stateless
@@ -16,28 +14,30 @@ public class User implements UserRemoteInterface {
     public User() {
         // TODO Auto-generated constructor stub
     }
-
+    
     @Override
-	public Integer createDate(String text) {
-		Date d = new Date();  
-		d.setText(text);
-		em.persist(d);
+	public Integer createDate() {
+    	// Ist diese Methode Notwendig?
+    	System.out.println("createDate()");
+    	Calendar cal = new GregorianCalendar(2013,1,28,13,24,56);
+    	Date d = new Date(cal, 30, "bla", "cok", "suking", "gangban", null);
+    	em.persist(d);
 		return d.getId();
-	}
-    
-    
-    public String readText(int id) {
-    	Date q = em.find(Date.class, id);
-		return q.getText();
-    	
-    }
+    }    
     
 	@Override
-	public Integer createDate(Date date) {
-		Date d = new Date();  
+	public Integer createDate( Date date) {
+		System.out.println("createDate(Date date)");	// Funktionsaufruf in Server-Console ausgeben
+		Date d = new Date();
 		d = date;
+		/*d.setAuthor(date.getAuthor());
+		d.setDateAndTime(date.getDateAndTime());
+		d.setDescription(date.getDescription());
+		d.setDuration(date.getDuration());
+		d.setLabel(date.getLabel());
+		d.setPlace(date.getPlace()); */
 		em.persist(d);
-		return d.getId();
+		return d.getId();	// Return der ID des angelegten Termins
 	}
 
 	@Override

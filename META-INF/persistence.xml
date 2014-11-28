@@ -8,11 +8,11 @@
 		<jta-data-source>java:jboss/datasources/ExampleDS</jta-data-source>
 		<class>package calendar.Date</class>
 		<properties>
-			<property name="hibernate.connection.password" value="sa" />
-			<property name="hibernate.connection.username" value="sa" />
+			<!--  <property name="hibernate.connection.password" value="" /> -->
+			<!--  <property name="hibernate.connection.username" value="root" /> -->
 			<!-- Properties for Hibernate -->
 			<property name="hibernate.hbm2ddl.auto" value="create-drop" />
-			<property name="hibernate.show_sql" value="false" />
+			<property name="hibernate.show_sql" value="true" />
 		</properties>
 	</persistence-unit>
 </persistence>

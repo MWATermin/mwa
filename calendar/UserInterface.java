@@ -28,20 +28,17 @@ List searchNextFreeTermin(List member, Date fromDate, Date toDate, int terminLen
 */
 public interface UserInterface {
 	
-	public Integer createDate(String text); // DS Test
+	public Integer createDate(); // überflüssig
 	
-	public String readText(int id); // DS Test
+	public Integer createDate( Date date);
 	
+	public Integer getDateID( Date date);
 	
-	public Integer createDate(Date date);
+	public Boolean deleteDate( Integer dateID);
 	
-	public Integer getDateID(Date date);
+	public List<Date> getDates( Date date, Integer timeRange);
 	
-	public Boolean deleteDate(Integer dateID);
+	public Date updateDate( Integer dateID, Date newDate);
 	
-	public List<Date> getDates(Date date, Integer timeRange);
-	
-	public Date updateDate(Integer dateID, Date newDate);
-	
-	public List<Date> searchNextFreeTermin(List<String> member, java.util.Calendar fromDate, java.util.Calendar toDate, Integer dateLength);
+	public List<Date> searchNextFreeTermin( List<String> member, java.util.Calendar fromDate, java.util.Calendar toDate, Integer dateLength);
 }
