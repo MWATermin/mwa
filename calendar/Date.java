@@ -38,7 +38,7 @@ public class Date implements Serializable {
 	// Konstruktor
 	public Date( Calendar dateAndTime, Integer duration, 
 			String author, String place, String label, String description, String members) {
-		//super();
+		super();
 		this.dateAndTime = dateAndTime;
 		this.duration = duration;
 		this.author = author;
