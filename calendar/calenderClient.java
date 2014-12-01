@@ -1,7 +1,16 @@
 package calendar;
 
-import java.util.*;
-import javax.naming.*;
+import java.text.DateFormat;
+import java.text.SimpleDateFormat;
+import java.util.ArrayList;
+import java.util.Calendar;
+import java.util.GregorianCalendar;
+import java.util.Hashtable;
+import java.util.ListIterator;
+
+import javax.naming.Context;
+import javax.naming.InitialContext;
+import javax.naming.NamingException;
 
 public class calenderClient {
 	
@@ -10,7 +19,7 @@ public class calenderClient {
 	}
 
 	private static void invokeStatelessBean() throws NamingException {
-		final UserRemoteInterface CalenderInterface = doLoopup();
+		final UserRemoteInterface CalendarInterface = doLoopup();
 		System.out.println("Obtained a Quoter for invocation"); 
 		
 		System.out.println("createQuote\n");
@@ -21,12 +30,49 @@ public class calenderClient {
 		System.out.println(CalenderInterface.readText( myid));
 		*/ 
 		
-		Calendar cal = new GregorianCalendar(2013,1,28,13,24,56);
-		Date date = new Date(cal, 30, "bla", "cok", "suking", "gangbang", null);
-		//int myid = CalenderInterface.createDate();
-		Integer myid = CalenderInterface.createDate( date);
-		System.out.println("CalendarID: " + myid + "\n");
 		
+		Calendar cal = new GregorianCalendar(2013,1,28,13,24,56);
+		
+		Date date = new Date(cal, 30, "bla", "cok", "suking", "gangban111", null);
+		//int myid = CalenderInterface.createDate();
+		Integer myid = CalendarInterface.createDate( date);
+		System.out.println("CalendarID1: " + myid + "\n");
+		
+		cal = new GregorianCalendar(2014,1,28,13,25,56);
+		date = new Date(cal, 30, "bla", "cok", "suking", "gangban222", null);
+		myid = CalendarInterface.createDate( date);
+		System.out.println("CalendarID2: " + myid + "\n");
+		
+		
+		//Update Date Test-Case
+		Date d = new Date(cal, 30, "blab", "bad", "beer", "gangban11", "member");
+		CalendarInterface.updateDate(1, d);
+		System.out.println("updateDate(1, d)");
+		
+		ArrayList<Date> DateList;
+		DateList = CalendarInterface.getAllDatesInDB();
+		System.out.println("getAllDatesInDB()");
+
+		
+		// Print ArrayList<Date>
+		ListIterator<Date> li = DateList.listIterator();
+		System.out.println("size: " + DateList.size() + "\n");
+		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
+		while( li.hasNext()) {
+			Date serverDate = DateList.get( li.nextIndex());
+			System.out.println( "ID: " + serverDate.getId() + "\n" + 
+					"Description: " + serverDate.getDescription() + "\n" +
+					"Label: " + serverDate.getLabel() + "\n" +
+					"Members: " + serverDate.getMembers() + "\n" +
+					"Place: " + serverDate.getPlace() + "\n" +
+					"Duration: " + serverDate.getDuration() + "\n" + 
+					"DateAndTime: " + dateFormat.format( serverDate.getDateAndTime().getTime()) + "\n"
+					);
+			
+			li.next();
+			
+		}
+		// ENDE Print ArrayList<Date>
 	}
 
 	// Looks up and returns the proxy to remote interface

@@ -36,9 +36,11 @@ public interface UserInterface {
 	
 	public Boolean deleteDate( Integer dateID);
 	
-	public List<Date> getDates( Date date, Integer timeRange);
+	public ArrayList<Date> getAllDatesInDB(); // DSC: Ausgabe aller Date in der DB
 	
-	public Date updateDate( Integer dateID, Date newDate);
+	public ArrayList<Date> getDates( Date date, Integer timeRange);
 	
-	public List<Date> searchNextFreeTermin( List<String> member, java.util.Calendar fromDate, java.util.Calendar toDate, Integer dateLength);
+	public void updateDate( Integer dateID, Date newDate);
+	
+	public ArrayList<Date> searchNextFreeTermin( ArrayList<String> member, java.util.Calendar fromDate, java.util.Calendar toDate, Integer dateLength);
 }

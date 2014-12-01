@@ -1,6 +1,7 @@
 package calendar;
 
 import java.util.*;
+
 import javax.ejb.*;
 import javax.persistence.*;
 
@@ -53,19 +54,39 @@ public class User implements UserRemoteInterface {
 	}
 
 	@Override
-	public List<Date> getDates(Date date, Integer timeRange) {
+	public ArrayList<Date> getDates(Date date, Integer timeRange) {
 		// TODO Auto-generated method stub
 		return null;
 	}
-
+	
 	@Override
-	public Date updateDate(Integer dateID, Date newDate) {
-		// TODO Auto-generated method stub
-		return null;
+	public ArrayList<Date> getAllDatesInDB() {
+		// gibt alle Datensätze in der DB zurück
+		System.out.println("call: getAllDatesInDB()");
+		ArrayList<Date> li = (ArrayList<Date>) em.createQuery("FROM Date").getResultList();
+		System.out.println("excecuted: getAllDatesInDB()");
+		return li;
 	}
 
 	@Override
-	public List<Date> searchNextFreeTermin(List<String> member,
+	public void updateDate(Integer dateID, Date newDate) {
+		// TODO Auto-generated method stub
+		Date d;
+		d = em.find( Date.class, dateID);
+		
+		d.setAuthor(newDate.getAuthor());
+		d.setDateAndTime(newDate.getDateAndTime());
+		d.setDescription(newDate.getDescription());
+		d.setDuration(newDate.getDuration());
+		d.setLabel(newDate.getLabel());
+		d.setMembers(newDate.getMembers());
+		d.setPlace(newDate.getPlace());
+		
+		return;
+	}
+
+	@Override
+	public ArrayList<Date> searchNextFreeTermin( ArrayList<String> member,
 			Calendar fromDate, Calendar toDate, Integer dateLength) {
 		// TODO Auto-generated method stub
 		return null;
