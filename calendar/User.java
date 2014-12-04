@@ -43,6 +43,11 @@ public class User implements UserRemoteInterface {
 
 	@Override
 	public Integer getDateID(Date date) {
+		ArrayList<Date> allDates = getAllDatesInDB();
+		int index = allDates.indexOf(date);
+		if(index >= 0){
+			return index;
+		}
 		// TODO Auto-generated method stub
 		return null;
 	}
@@ -61,7 +66,7 @@ public class User implements UserRemoteInterface {
 	
 	@Override
 	public ArrayList<Date> getAllDatesInDB() {
-		// gibt alle Datensätze in der DB zurück
+		// gibt alle Datensï¿½tze in der DB zurï¿½ck
 		System.out.println("call: getAllDatesInDB()");
 		ArrayList<Date> li = (ArrayList<Date>) em.createQuery("FROM Date").getResultList();
 		System.out.println("excecuted: getAllDatesInDB()");
