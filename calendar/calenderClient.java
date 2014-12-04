@@ -49,12 +49,15 @@ public class calenderClient {
 		CalendarInterface.updateDate(1, d);
 		System.out.println("updateDate(1, d)");
 		
+		
+		CalendarInterface.deleteDate(2);
+		
+		
+		// Print ArrayList<Date>
 		ArrayList<Date> DateList;
 		DateList = CalendarInterface.getAllDatesInDB();
 		System.out.println("getAllDatesInDB()");
-
 		
-		// Print ArrayList<Date>
 		ListIterator<Date> li = DateList.listIterator();
 		System.out.println("size: " + DateList.size() + "\n");
 		DateFormat dateFormat = new SimpleDateFormat("yyyy-MM-dd HH:mm:ss");
