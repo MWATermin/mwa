@@ -49,8 +49,8 @@ public class User implements UserRemoteInterface {
 
 	@Override
 	public Boolean deleteDate(Integer dateID) {
-		// TODO Auto-generated method stub
-		return null;
+		em.remove(em.find(Date.class, dateID));
+		return true;
 	}
 
 	@Override
@@ -61,7 +61,7 @@ public class User implements UserRemoteInterface {
 	
 	@Override
 	public ArrayList<Date> getAllDatesInDB() {
-		// gibt alle Datensätze in der DB zurück
+		// gibt alle Datensï¿½tze in der DB zurï¿½ck
 		System.out.println("call: getAllDatesInDB()");
 		ArrayList<Date> li = (ArrayList<Date>) em.createQuery("FROM Date").getResultList();
 		System.out.println("excecuted: getAllDatesInDB()");
@@ -72,8 +72,8 @@ public class User implements UserRemoteInterface {
 	public void updateDate(Integer dateID, Date newDate) {
 		// TODO Auto-generated method stub
 		Date d;
-		d = em.find( Date.class, dateID);
-		
+		d = em.find(Date.class, dateID);
+
 		d.setAuthor(newDate.getAuthor());
 		d.setDateAndTime(newDate.getDateAndTime());
 		d.setDescription(newDate.getDescription());
