@@ -13,69 +13,63 @@ public class User implements UserRemoteInterface {
 	private EntityManager em;
 	
     public User() {
-        // TODO Auto-generated constructor stub
+       
     }
     
-    @Override
-	public Integer createDate() {
-    	// Ist diese Methode Notwendig?
-    	System.out.println("createDate()");
-    	Calendar cal = new GregorianCalendar(2013,1,28,13,24,56);
-    	Date d = new Date(cal, 30, "bla", "cok", "suking", "gangban", null);
-    	em.persist(d);
-		return d.getId();
-    }    
-    
 	@Override
-	public Integer createDate( Date date) {
+	public Integer createDate( Date date, String username) {
 		System.out.println("createDate(Date date)");	// Funktionsaufruf in Server-Console ausgeben
 		Date d = new Date();
 		d = date;
-		/*d.setAuthor(date.getAuthor());
+		d.setAuthor(username);
+		d.setMembers(date.getMembers());
 		d.setDateAndTime(date.getDateAndTime());
 		d.setDescription(date.getDescription());
 		d.setDuration(date.getDuration());
 		d.setLabel(date.getLabel());
-		d.setPlace(date.getPlace()); */
+		d.setPlace(date.getPlace());
 		em.persist(d);
 		return d.getId();	// Return der ID des angelegten Termins
 	}
 
 	@Override
 	public Integer getDateID(Date date) {
-		ArrayList<Date> allDates = getAllDatesInDB();
+		ArrayList<Date> allDates = getAllDatesInDB("");
 		int index = allDates.indexOf(date);
 		if(index >= 0){
 			return index;
 		}
-		// TODO Auto-generated method stub
 		return null;
 	}
 
 	@Override
-	public Boolean deleteDate(Integer dateID) {
-		em.remove(em.find(Date.class, dateID));
-		return true;
+	public Boolean deleteDate(Integer dateID, String username) {
+		Date d = em.find(Date.class, dateID);
+		if(username.equals(d.getAuthor()) || username.equals("admin")) {
+			em.remove(d);
+			return true;
+		}
+		return false;
 	}
 
 	@Override
 	public ArrayList<Date> getDates(Date date, Integer timeRange) {
-		// TODO Auto-generated method stub
+		
 		return null;
 	}
 	
 	@Override
-	public ArrayList<Date> getAllDatesInDB() {
-		// gibt alle Datens�tze in der DB zur�ck
+	public ArrayList<Date> getAllDatesInDB(String username) {
 		System.out.println("call: getAllDatesInDB()");
-		ArrayList<Date> li = (ArrayList<Date>) em.createQuery("FROM Date").getResultList();
+		//ArrayList<Date> li = (ArrayList<Date>) em.createQuery("FROM Date WHERE authorFROM=" + username).getResultList();
+		ArrayList<Date> li = (ArrayList<Date>) em.createQuery("FROM Date WHERE author = :cauthor").setParameter("cauthor", username).getResultList();
+				
 		System.out.println("excecuted: getAllDatesInDB()");
 		return li;
 	}
 
 	@Override
 	public void updateDate(Integer dateID, Date newDate) {
-		// TODO Auto-generated method stub
 		Date d;
 		d = em.find(Date.class, dateID);
 
@@ -93,7 +87,6 @@ public class User implements UserRemoteInterface {
 	@Override
 	public ArrayList<Date> searchNextFreeTermin( ArrayList<String> member,
 			Calendar fromDate, Calendar toDate, Integer dateLength) {
-		// TODO Auto-generated method stub
 		return null;
 	}
 

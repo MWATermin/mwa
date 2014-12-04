@@ -28,7 +28,7 @@ public class Date implements Serializable {
 	private String place;
 	private String label;
 	private String description;
-	private String members;
+	private ArrayList<String> members;
 	
 	// Default Konstruktor
 	public Date() {
@@ -37,7 +37,7 @@ public class Date implements Serializable {
 	
 	// Konstruktor
 	public Date( Calendar dateAndTime, Integer duration, 
-			String author, String place, String label, String description, String members) {
+			String author, String place, String label, String description, ArrayList<String> members) {
 		super();
 		this.dateAndTime = dateAndTime;
 		this.duration = duration;
@@ -50,7 +50,7 @@ public class Date implements Serializable {
 	
 	// Getters & Setters
 	@Id
-	@GeneratedValue // Sorgt dafür, das ID automatisch erzeugt wird
+	@GeneratedValue // Sorgt dafï¿½r, das ID automatisch erzeugt wird
 	public Integer getId() {
 		return id;
 	}
@@ -107,11 +107,11 @@ public class Date implements Serializable {
 		this.description = description;
 	}
 	
-	public String getMembers() {
+	public ArrayList<String> getMembers() {
 		return members;
 	}
 
-	public void setMembers( String members) {
+	public void setMembers( ArrayList<String> members) {
 		this.members = members;
 	}
 }

@@ -28,15 +28,13 @@ List searchNextFreeTermin(List member, Date fromDate, Date toDate, int terminLen
 */
 public interface UserInterface {
 	
-	public Integer createDate(); // überflüssig
-	
-	public Integer createDate( Date date);
+	public Integer createDate( Date date, String username);
 	
 	public Integer getDateID( Date date);
 	
-	public Boolean deleteDate( Integer dateID);
+	public Boolean deleteDate( Integer dateID, String username);
 	
-	public ArrayList<Date> getAllDatesInDB(); // DSC: Ausgabe aller Date in der DB
+	public ArrayList<Date> getAllDatesInDB(String username); // DSC: Ausgabe aller Date in der DB
 	
 	public ArrayList<Date> getDates( Date date, Integer timeRange);
 	

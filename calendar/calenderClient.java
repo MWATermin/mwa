@@ -28,34 +28,42 @@ public class calenderClient {
 		
 		System.out.println("readQuote\n");
 		System.out.println(CalenderInterface.readText( myid));
-		*/ 
 		
+		
+		*/
+		String username = "John";
+		ArrayList<String> members = new ArrayList<String>();
+		members.add(username);
 		
 		Calendar cal = new GregorianCalendar(2013,1,28,13,24,56);
 		
 		Date date = new Date(cal, 30, "bla", "cok", "suking", "gangban111", null);
 		//int myid = CalenderInterface.createDate();
-		Integer myid = CalendarInterface.createDate( date);
+		Integer myid = CalendarInterface.createDate( date, username);
 		System.out.println("CalendarID1: " + myid + "\n");
 		
 		cal = new GregorianCalendar(2014,1,28,13,25,56);
 		date = new Date(cal, 30, "bla", "cok", "suking", "gangban222", null);
-		myid = CalendarInterface.createDate( date);
+		myid = CalendarInterface.createDate( date, username);
 		System.out.println("CalendarID2: " + myid + "\n");
 		
 		
 		//Update Date Test-Case
-		Date d = new Date(cal, 30, "blab", "bad", "beer", "gangban11", "member");
+		Date d = new Date(cal, 30, "blab", "bad", "beer", "gangban11", members);
+		CalendarInterface.updateDate(1, d);
+		System.out.println("updateDate(1, d)");
+		
+		d = new Date(cal, 30, username, "bad", "beer123", "gangban11", members);
 		CalendarInterface.updateDate(1, d);
 		System.out.println("updateDate(1, d)");
 		
 		
-		CalendarInterface.deleteDate(2);
+		//CalendarInterface.deleteDate(myid, username);
 		
 		
 		// Print ArrayList<Date>
 		ArrayList<Date> DateList;
-		DateList = CalendarInterface.getAllDatesInDB();
+		DateList = CalendarInterface.getAllDatesInDB( username);
 		System.out.println("getAllDatesInDB()");
 		
 		ListIterator<Date> li = DateList.listIterator();
@@ -64,7 +72,8 @@ public class calenderClient {
 		while( li.hasNext()) {
 			Date serverDate = DateList.get( li.nextIndex());
 			System.out.println( "ID: " + serverDate.getId() + "\n" + 
-					"Description: " + serverDate.getDescription() + "\n" +
+ 					"Description: " + serverDate.getDescription() + "\n" +
+					"Author: " + serverDate.getAuthor() + "\n" +
 					"Label: " + serverDate.getLabel() + "\n" +
 					"Members: " + serverDate.getMembers() + "\n" +
 					"Place: " + serverDate.getPlace() + "\n" +
@@ -80,8 +89,8 @@ public class calenderClient {
 
 	// Looks up and returns the proxy to remote interface
 	private static UserRemoteInterface doLoopup() throws NamingException{
-		final Hashtable jndiProperties = new Hashtable(); 
-		jndiProperties.put(Context.URL_PKG_PREFIXES,"org.jboss.ejb.client.naming"); 
+		final Hashtable jndiProperties = new Hashtable();
+		jndiProperties.put(Context.URL_PKG_PREFIXES,"org.jboss.ejb.client.naming");
 		final Context context = new InitialContext(jndiProperties);
 		// The app is typically the ear name
 		final String appName = "";
