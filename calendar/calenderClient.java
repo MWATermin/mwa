@@ -19,7 +19,7 @@ public class calenderClient {
 	}
 
 	private static void invokeStatelessBean() throws NamingException {
-		final UserRemoteInterface CalendarInterface = doLoopup();
+		final CalRemoteInterface CalendarInterface = doLoopup();
 		System.out.println("Obtained a Quoter for invocation"); 
 		
 		System.out.println("createQuote\n");
@@ -88,7 +88,7 @@ public class calenderClient {
 	}
 
 	// Looks up and returns the proxy to remote interface
-	private static UserRemoteInterface doLoopup() throws NamingException{
+	private static CalRemoteInterface doLoopup() throws NamingException{
 		final Hashtable jndiProperties = new Hashtable();
 		jndiProperties.put(Context.URL_PKG_PREFIXES,"org.jboss.ejb.client.naming");
 		final Context context = new InitialContext(jndiProperties);
@@ -98,12 +98,12 @@ public class calenderClient {
 		final String moduleName = "Calendar";
 		final String distinctName = "";
 		// The EJB name which by default is the simple class name of the bean // implementation class
-		final String beanName = User.class.getSimpleName();
+		final String beanName = Cal.class.getSimpleName();
 		// the remote view fully qualified class name
-		final String viewClassName = UserRemoteInterface.class.getName(); // let's do the lookup
+		final String viewClassName = CalRemoteInterface.class.getName(); // let's do the lookup
 		String lookupName = "ejb:" + appName + "/" + moduleName + "/"
 				+ distinctName + "/" + beanName + "!" + viewClassName;
 		System.out.println(lookupName);
-		return (UserRemoteInterface) context.lookup(lookupName);
+		return (CalRemoteInterface) context.lookup(lookupName);
 	}
 }
