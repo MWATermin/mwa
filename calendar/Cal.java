@@ -18,6 +18,7 @@ public class Cal implements CalRemoteInterface {
        
     }
     
+	@PermitAll
 	@Override
 	public Integer createDate( Date date, String username) {
 		Date d = new Date();
@@ -35,6 +36,7 @@ public class Cal implements CalRemoteInterface {
 		return d.getId();
 	}
 
+	@PermitAll
 	@Override
 	public Integer getDateID(Date date) {
 		ArrayList<Date> allDates = getAllDatesInDB("");
@@ -47,6 +49,7 @@ public class Cal implements CalRemoteInterface {
 		return null;
 	}
 
+	@PermitAll
 	@Override
 	public Boolean deleteDate(Integer dateID, String username) {
 		Date d = em.find(Date.class, dateID);
@@ -59,6 +62,7 @@ public class Cal implements CalRemoteInterface {
 		return false;
 	}
 
+	@PermitAll
 	@Override
 	public ArrayList<Date> getDates(Date date, Integer timeRange, String username) {
 		System.out.println("excecuted: getDates()");
@@ -80,6 +84,7 @@ public class Cal implements CalRemoteInterface {
 		return dateArray;
 	}
 	
+	@PermitAll
 	@Override
 	public ArrayList<Date> getAllDatesInDB(String username) {
 		ArrayList<Date> li = (ArrayList<Date>) em.createQuery("FROM Date WHERE author = :cauthor").setParameter("cauthor", username).getResultList();		
@@ -88,6 +93,7 @@ public class Cal implements CalRemoteInterface {
 		return li;
 	}
 
+	@PermitAll
 	@Override
 	public void updateDate(Integer dateID, Date newDate) {
 		Date d;
@@ -104,6 +110,7 @@ public class Cal implements CalRemoteInterface {
 		return;
 	}
 
+	@PermitAll
 	@Override
 	public ArrayList<Date> searchNextFreeTermin( ArrayList<String> member,
 			Calendar fromDate, Calendar toDate, Integer dateLength) {
